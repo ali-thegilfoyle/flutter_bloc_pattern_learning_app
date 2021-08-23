@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc_pattern_learning_app/BloC/counter_bloc.dart';
+import 'package:flutter_bloc_pattern_learning_app/BloC/counter_event.dart';
 import 'package:flutter_bloc_pattern_learning_app/Screens/second_screen.dart';
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  MainScreen({Key? key}) : super(key: key);
+
+  final _bloc = CounterBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +20,7 @@ class MainScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () => _bloc.counterEventSink.add(IncrementCounter()),
               child: Text("Increment Counter"),
             ),
             ElevatedButton(
@@ -24,7 +28,12 @@ class MainScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SecondScreen()),
+                  MaterialPageRoute(
+                    builder: (context) => SecondScreen(
+                      // this is the basic implementation of bloC where we are doing things manually, with flutter_bloc package we don't need to pass it through constructor, we can access the bloc varaible in BlocBuilder.
+                      bloc: _bloc,
+                    ),
+                  ),
                 );
               },
             ),
