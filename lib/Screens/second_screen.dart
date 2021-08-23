@@ -5,6 +5,12 @@ class SecondScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Second Screen - BloC Pattern"),
+        centerTitle: true,
+      ),
+      body: Center(child: Text("Counter Value: ")),
+    );
   }
 }
